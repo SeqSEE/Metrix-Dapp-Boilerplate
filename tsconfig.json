@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
@@ -23,26 +19,14 @@
     "baseUrl": "./",
     "outDir": ".build",
     "paths": {
-      "@src/*": [
-        "./src/*"
-      ],
-      "@server/*": [
-        "./server/*"
-      ],
-      "@worker/*": [
-        "./server_worker/*"
-      ]
+      "@src/*": ["./src/*"],
+      "@server/*": ["./server/*"],
+      "@worker/*": ["./server_worker/*"]
     },
     "incremental": true
   },
   "include": [],
-  "exclude": [
-    "node_modules",
-    "lib",
-    "dist",
-    ".build",
-    ".next"
-  ],
+  "exclude": ["node_modules", "lib", "dist", ".build", ".next"],
   "references": [
     {
       "path": "./src"
