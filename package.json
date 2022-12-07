@@ -63,6 +63,7 @@
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.14",
     "@types/jsonwebtoken": "^8.5.9",
+    "@types/locks": "^0.2.1",
     "@types/node": "^18.11.11",
     "@types/sequelize": "^4.28.14",
     "@web3-react/core": "^6.1.9",
