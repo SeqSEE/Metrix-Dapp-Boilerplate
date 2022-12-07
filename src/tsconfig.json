@@ -1,0 +1,19 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es6",
+    "noEmit": true,
+    "outDir": "../.next"
+  },
+  "include": ["**/*"],
+  "exclude": [".build"],
+  "references": [
+    {
+      "path": "../server_worker"
+    },
+    {
+      "path": "../server"
+    }
+  ]
+}
