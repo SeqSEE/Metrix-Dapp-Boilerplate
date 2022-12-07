@@ -13,14 +13,6 @@ export default function Layout(props: { children: JSX.Element }): JSX.Element {
       <div className="stars"></div>
       <div className="stars"></div>
       <div className="stars"></div>
-      <div className="stars"></div>
-      <div className="stars"></div>
-      <div className="stars"></div>
-      <div className="stars"></div>
-      <div className="stars"></div>
-      <div className="stars"></div>
-      <div className="stars"></div>
-      <div className="stars"></div>
       <Navigation />
       <Container className="innerWrapper">
         <Grid>

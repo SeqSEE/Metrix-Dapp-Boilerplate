@@ -21,60 +21,60 @@ body {
   animation: fadeInAnimation ease 0.5s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
+  color: whitesmoke;
 }
 
 .grid-container {
-	position: relative;
-	font-size: 30px;
-	margin: 0 auto;
-	display: grid;
-	grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
-	padding: 5px;
-	background-position: center; 
-	background-repeat: no-repeat;
-	background-size: cover;
-    -ms-background-size: cover;
-    -o-background-size: cover;
-    -moz-background-size: cover;
-    -webkit-background-size: cover;
-    width: 100%;
-  
+  position: relative;
+  font-size: 30px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
+  padding: 5px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  width: 100%;
+  color: whitesmoke;
 }
 
-.game-tile{
-	border: 1px solid whitesmoke !important;;
-	background-color: rgba(255, 255, 255, 0.3);
+.game-tile {
+  border: 1px solid whitesmoke !important;
+  background-color: rgba(255, 255, 255, 0.3);
   font-size: 38px;
   line-height: 38px;
   color: whitesmoke;
 }
 
-
 .grid-item {
   font-size: 25px;
 }
 
-.game-tile, .grid-item {
-	
+.game-tile,
+.grid-item {
   height: 5.3vw !important;
   max-height: 70px !important;
-	width: 100%;
-	margin: auto;
+  width: 100%;
+  margin: auto;
 
-	text-align: center;
-	vertical-align: middle;
-	box-sizing: border-box;
-	position: relative;
-	-webkit-touch-callout: none; /* iOS Safari */
-	-webkit-user-select: none; /* Safari */
-	-khtml-user-select: none; /* Konqueror HTML */
-	-moz-user-select: none; /* Firefox */
-	-ms-user-select: none; /* Internet Explorer/Edge */
-	user-select: none; 
-
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  position: relative;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
 }
 
-#space, .stars {
+#space,
+.stars {
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -83,16 +83,17 @@ body {
   right: 0;
 }
 
-
-
 .stars {
-  background-image: 
-    radial-gradient(4px 4px at 20px 30px, #eee, rgba(0,0,0,0)),
-    radial-gradient(4px 4px at 40px 70px, #fff, rgba(0,0,0,0)),
-    radial-gradient(4px 4px at 50px 160px, #ddd, rgba(0,0,0,0)),
-    radial-gradient(4px 4px at 90px 40px, #fff, rgba(0,0,0,0)),
-    radial-gradient(4px 4px at 130px 80px, #fff, rgba(0,0,0,0)),
-    radial-gradient(4px 4px at 160px 120px, #ddd, rgba(0,0,0,0));
+  background-image: radial-gradient(
+      4px 4px at 20px 30px,
+      #eee,
+      rgba(0, 0, 0, 0)
+    ),
+    radial-gradient(4px 4px at 40px 70px, #fff, rgba(0, 0, 0, 0)),
+    radial-gradient(4px 4px at 50px 160px, #ddd, rgba(0, 0, 0, 0)),
+    radial-gradient(4px 4px at 90px 40px, #fff, rgba(0, 0, 0, 0)),
+    radial-gradient(4px 4px at 130px 80px, #fff, rgba(0, 0, 0, 0)),
+    radial-gradient(4px 4px at 160px 120px, #ddd, rgba(0, 0, 0, 0));
   background-repeat: repeat;
   background-size: 200px 200px;
   animation: zoom 10s linear infinite;
@@ -100,13 +101,16 @@ body {
 }
 
 .stars {
-  background-image: 
-    radial-gradient(1px 1px at 20px 30px, #eee, rgba(0,0,0,0)),
-    radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
-    radial-gradient(1px 1px at 50px 160px, #ddd, rgba(0,0,0,0)),
-    radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
-    radial-gradient(1px 1px at 130px 80px, #fff, rgba(0,0,0,0)),
-    radial-gradient(1px 1px at 160px 120px, #ddd, rgba(0,0,0,0));
+  background-image: radial-gradient(
+      1px 1px at 20px 30px,
+      #eee,
+      rgba(0, 0, 0, 0)
+    ),
+    radial-gradient(1px 1px at 40px 70px, #fff, rgba(0, 0, 0, 0)),
+    radial-gradient(1px 1px at 50px 160px, #ddd, rgba(0, 0, 0, 0)),
+    radial-gradient(1px 1px at 90px 40px, #fff, rgba(0, 0, 0, 0)),
+    radial-gradient(1px 1px at 130px 80px, #fff, rgba(0, 0, 0, 0)),
+    radial-gradient(1px 1px at 160px 120px, #ddd, rgba(0, 0, 0, 0));
   background-repeat: repeat;
   background-size: 200px 200px;
 }
@@ -137,7 +141,7 @@ body {
     opacity: 0;
     transform: scale(0.5);
     animation-timing-function: ease-in;
-  } 
+  }
   85% {
     opacity: 1;
     transform: scale(2.8);
@@ -148,8 +152,6 @@ body {
     transform: scale(3.5);
   }
 }
-
-
 
 @keyframes fadeInAnimation {
   0% {
@@ -173,12 +175,14 @@ div.column {
   background-repeat: no-repeat;
   background-size: 75% auto;
   background-position: center;
+  color: whitesmoke;
 }
 
 .bgText {
   margin: 55% auto;
   padding: 10px;
   font-family: 'Ubuntu' !important;
+  color: whitesmoke;
 }
 
 .depositAddress {
@@ -202,7 +206,7 @@ input#vendor_balance {
   padding: auto;
   margin-bottom: 16px !important;
   margin-top: 40px !important;
-  
+
   min-height: 65em;
   max-height: 65em;
 }
