@@ -1,4 +1,4 @@
-import { apiUrl } from './confServer';
+import { apiUrl } from './server';
 
 let extApiUrl = undefined;
 if (typeof window !== 'undefined') {
