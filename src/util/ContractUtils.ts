@@ -19,7 +19,7 @@ const getABI = async (contract: string) => {
 const getABIloc = async (contract: 'MRC20' | string) => {
   let abi: any[] = [];
   try {
-    abi = JSON.parse(JSON.stringify(await import(`../abi/token/${contract}`)))[
+    abi = JSON.parse(JSON.stringify(await import(`../abi/${contract}.json`)))[
       contract
     ];
   } catch (e) {
