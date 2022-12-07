@@ -1,4 +1,4 @@
-import { fqdn } from '@src/config/confServer';
+import { fqdn } from '@src/config/server';
 import { fetchWrapper } from '@src/helpers/FetchWrapper';
 import InteractResponse from '@src/interfaces/InteractResponse';
 import { ethers } from 'ethers';
@@ -33,7 +33,7 @@ const AddressZero = ethers.constants.AddressZero.replace('0x', '');
 const HashZero = ethers.constants.HashZero.replace('0x', '');
 
 let f = '';
-for (var i = 0; i < 64; i++) {
+for (let i = 0; i < 64; i++) {
   f += 'f';
 }
 const HashMax = f;
@@ -173,9 +173,9 @@ const sendToContract = async (
   contract: string,
   method: string,
   data: any[],
-  value: string = '0',
-  gasLimit: number = 250000,
-  gasPrice: number = 5000,
+  value = '0',
+  gasLimit = 250000,
+  gasPrice = 5000,
   abi: any[]
 ): Promise<InteractResponse> => {
   const iface = new ethers.utils.Interface(abi);
@@ -200,7 +200,7 @@ const sendToContract = async (
 
 const signMessage = async (message: string): Promise<InteractResponse> => {
   try {
-    let address = await (window as any).metrimask.account.address;
+    const address = await (window as any).metrimask.account.address;
     const result = await (window as any).metrimask.rpcProvider.signMessage([
       fqdn,
       message,
@@ -219,6 +219,7 @@ const getContractAddress = (
   network: string,
   contract: 'MetriVersePlatform' | 'SimpleAuction' | string
 ) => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const ContractAddresses = require(`/networks/${process.env.NEXT_PUBLIC_APP_VERSION}/${network}.json`);
   const address = ContractAddresses[contract];
   return address ? address : AddressZero;

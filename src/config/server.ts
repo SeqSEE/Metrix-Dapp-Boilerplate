@@ -1,6 +1,6 @@
-let protocol = process.env.HOST_PROTOCOL;
-let host = process.env.HOST_URI;
-let port = process.env.NEXT_PUBLIC_HOST_PORT;
+const protocol = process.env.HOST_PROTOCOL;
+const host = process.env.HOST_URI;
+const port = process.env.NEXT_PUBLIC_HOST_PORT;
 
 const apiUrl =
   host != undefined ? `${protocol}://${host}:${port}/api` : undefined;

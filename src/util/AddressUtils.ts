@@ -8,7 +8,7 @@ export const EthereumAddressRegex = /^0x[a-fA-F0-9]{40}$/;
 
 export const toHexAddress = (address: string) => {
   const bytes = bs58.decode(address);
-  const hex = bytes.toString('hex');
+  const hex = Buffer.from(bytes).toString('hex');
   return hex.substring(2, hex.length - 8);
 };
 
@@ -16,7 +16,7 @@ export const fromHexAddress = (network: 'MainNet' | 'TestNet', hex: string) => {
   if (hex.length !== 40) {
     return undefined;
   }
-  let bytes = [];
+  const bytes = [];
   for (let c = 0; c < hex.length; c += 2)
     bytes.push(parseInt(hex.substr(c, 2), 16));
   const hash = ethers.utils.arrayify(
