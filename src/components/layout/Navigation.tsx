@@ -13,24 +13,22 @@ export default function NavigationBar(): JSX.Element {
         <Grid.Row className="navigationBarCols">
           <Grid.Column width="4">
             <Link href="/">
-              <a>
-                <Header
-                  as="h1"
-                  className="navigation nav-header-logo"
-                  inverted
-                  style={{
-                    backgroundColor: 'transparent'
-                  }}
-                  icon
-                >
-                  {/*<Image src="/static/images/logos/logo.svg" size="massive" />*/}
-                  <Icon name="moon outline" />
-                </Header>
-                <Divider hidden={true} />
-                <Header size="large" className="nav-heading" inverted>
-                  {`${process.env.NEXT_PUBLIC_APP_NAME}`}
-                </Header>
-              </a>
+              <Header
+                as="h1"
+                className="navigation nav-header-logo"
+                inverted
+                style={{
+                  backgroundColor: 'transparent'
+                }}
+                icon
+              >
+                {/*<Image src="/static/images/logos/logo.svg" size="massive" />*/}
+                <Icon name="moon outline" />
+              </Header>
+              <Divider hidden={true} />
+              <Header size="large" className="nav-heading" inverted>
+                {`${process.env.NEXT_PUBLIC_APP_NAME}`}
+              </Header>
             </Link>
           </Grid.Column>
           <Grid.Column width="12">
