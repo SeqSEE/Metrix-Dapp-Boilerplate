@@ -220,7 +220,7 @@ const getContractAddress = (
   contract: 'MetriVersePlatform' | 'SimpleAuction' | string
 ) => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const ContractAddresses = require(`/networks/${process.env.NEXT_PUBLIC_APP_VERSION}/${network}.json`);
+  const ContractAddresses = require(`../network/${process.env.NEXT_PUBLIC_APP_VERSION}/${network}.json`);
   const address = ContractAddresses[contract];
   return address ? address : AddressZero;
 };
