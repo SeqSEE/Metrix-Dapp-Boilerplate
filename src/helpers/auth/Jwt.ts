@@ -1,7 +1,7 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { toHexString } from '../Parsers';
 import { randomBytes } from 'crypto';
-import { fqdn } from '@src/config/confServer';
+import { fqdn } from '../../config/server';
 
 const JWT_KEY = process.env.JWT_KEY;
 let SECRET_KEY = toHexString(randomBytes(22));
