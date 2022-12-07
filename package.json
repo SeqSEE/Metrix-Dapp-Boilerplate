@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "gen-sitemap": "node ./scripts/generate-sitemap.mjs",
+    "gen-robots": "node ./scripts/generate-robots.mjs",
+    "postbuild": "npm run gen-sitemap && npm run gen-robots",
     "dev": "cross-env NODE_ENV=development nodemon",
     "build-next": "cross-env NODE_ENV=production next build",
     "build-server": "tsc --project ./server/tsconfig.json",
