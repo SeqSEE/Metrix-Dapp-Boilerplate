@@ -279,7 +279,6 @@ input#vendor_balance {
 }
 
 .footerNavBar {
-  text-transform: uppercase;
   text-align: center;
   font-size: 12px !important;
   color: gray;

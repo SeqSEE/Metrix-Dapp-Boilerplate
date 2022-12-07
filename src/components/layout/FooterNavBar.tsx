@@ -4,7 +4,7 @@ import { Grid, Icon, List } from 'semantic-ui-react';
 export default function Footer(): JSX.Element {
   const d = new Date();
   return (
-    <Grid className="footer-bar" columns="equal">
+    <Grid className="footer-bar" columns="equal" stackable>
       <Grid.Row className="footerNavBar">
         <Grid.Column>
           <span style={{ padding: '0px 4px' }}>
