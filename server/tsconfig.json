@@ -13,7 +13,8 @@
     "*.ts",
     "**/*.ts",
     "../server_worker/index.ts",
-    "../server_worker/main/util/**/*"
-, "db/config/config.ts"  ],
+    "../server_worker/main/util/**/*",
+    "db/config/config.ts"
+  ],
   "exclude": [".build"]
 }
