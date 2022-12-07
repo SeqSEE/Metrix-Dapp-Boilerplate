@@ -1,11 +1,69 @@
 {
   "name": "metrix-dapp-boilerplate",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "cross-env NODE_ENV=development nodemon",
+    "build-next": "cross-env NODE_ENV=production next build",
+    "build-server": "tsc --project ./server/tsconfig.json",
+    "build-worker": "tsc --project ./server_worker/tsconfig.json",
+    "build-dev": "npm run build-server && npm run build-worker && npm run build-next",
+    "build": "npm run build-dev && npm run postbuild",
+    "start-dev": "cross-env NODE_ENV=development node .build/server/index.js",
+    "start": "cross-env NODE_ENV=production node .build/server/index.js",
+    "lint-server": "eslint \"./server/**/*\"",
+    "lint-worker": "eslint \"./server_worker/**/*\"",
+    "lint-next": "next lint",
+    "lint": "npm run lint-server && npm run lint-worker && npm run lint-next",
+    "migrate": "npx sequelize-cli db:migrate",
+    "seed": "npx sequelize-cli db:seed:all"
   },
-  "author": "",
-  "license": "MIT"
+  "author": "SeqSEE, squidicuzz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SeqSEE/metrix-dapp-boilerplate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SeqSEE/metrix-dapp-boilerplate/issues"
+  },
+  "homepage": "https://github.com/SeqSEE/metrix-dapp-boilerplate#readme",
+  "description": "",
+  "dependencies": {
+    "@fontsource/ubuntu": "^4.4.5",
+    "@metrixcoin/metrilib": "^1.3.0-alpha",
+    "@metrixnames/mnslib": "^2.0.4",
+    "axios": "^0.24.0",
+    "b58": "^4.0.3",
+    "bitcoinjs-message": "^2.2.0",
+    "chalk": "^4.1.2",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
+    "ethers": "^5.7.2",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "locks": "^0.2.2",
+    "moment": "^2.29.4",
+    "next": "^13.0.6",
+    "react": "^18.2.0",
+    "react-cookie": "^4.1.1",
+    "react-dom": "^18.2.0",
+    "semantic-ui-css": "^2.5.0",
+    "semantic-ui-react": "^2.1.4",
+    "sequelize": "^6.26.0",
+    "sqlite3": "^5.1.2",
+    "typescript": "^4.9.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.14",
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/node": "^18.11.11",
+    "@types/sequelize": "^4.28.14",
+    "@web3-react/types": "^6.0.7",
+    "eslint": "^8.29.0",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.1"
+  }
 }
