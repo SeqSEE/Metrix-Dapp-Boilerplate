@@ -298,7 +298,7 @@ export default function NetworkSign(props: NetworkProps): JSX.Element {
 
   function getLabel(): JSX.Element {
     return (
-      <span>
+      <span className="net-connect-btn-icon-label">
         {connected ? (
           <Icon name="chain" />
         ) : network.type === 'None' ? (
@@ -406,17 +406,7 @@ export default function NetworkSign(props: NetworkProps): JSX.Element {
 
   return (
     <Grid.Column stretched style={{ width: '-webkit-fill-available' }}>
-      <Segment
-        as="div"
-        style={{
-          padding: '5px 5px',
-          minWidth: '167px',
-          width: '-webkit-fill-available',
-          marginBottom: '2px',
-          backgroundColor: 'rgba(0,0,0,0.4)'
-        }}
-        textAlign="center"
-      >
+      <Segment as="div" textAlign="center" className="net-connect-segment">
         <Button fluid labelPosition="left" as="div" style={{ margin: '1px' }}>
           <Label
             as="span"

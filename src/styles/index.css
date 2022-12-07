@@ -42,36 +42,73 @@ body {
   color: whitesmoke;
 }
 
-.game-tile {
-  border: 1px solid whitesmoke !important;
-  background-color: rgba(255, 255, 255, 0.3);
-  font-size: 38px;
-  line-height: 38px;
-  color: whitesmoke;
+.innerWrapper-children {
+  padding-right: 0px !important;
 }
 
-.grid-item {
-  font-size: 25px;
+.metrimask-dl-lnk {
+  color: antiquewhite;
+}
+.metrimask-dl-lnk:hover {
+  color: rgba(253, 241, 224, 0.76);
+  text-shadow: 0px 0px 1px red;
+  font-weight: 600;
 }
 
-.game-tile,
-.grid-item {
-  height: 5.3vw !important;
-  max-height: 70px !important;
-  width: 100%;
-  margin: auto;
-
-  text-align: center;
-  vertical-align: middle;
-  box-sizing: border-box;
-  position: relative;
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none;
+/* network sign */
+.net-connect-segment {
+  padding: 0.6em 0.8em !important;
+  margin: 0px !important;
+  min-width: 240px;
+  max-width: 240px;
+  min-height: 100px;
+  width: -webkit-fill-available;
+  margin-bottom: 2px;
+  background-color: transparent !important;
+  border: 0px !important;
 }
+
+.net-connect-btn {
+  display: block !important;
+  margin: 2px 0px 0px 0px !important;
+  background: rgba(128, 96, 0, 0.2) !important;
+  background-color: rgba(128, 96, 0, 0.2) !important;
+  color: #fbbd08 !important;
+  border: 1px solid #fbbd08 !important;
+  /*font-size: 0.92em !important;*/
+  font-size: 0.7em !important;
+  line-height: 15px !important;
+  padding: 5px 5px !important;
+}
+
+.net-read-only {
+  display: block !important;
+  margin: 5px 0px 0px 0px !important;
+  background: rgba(32, 24, 0, 0.94) !important;
+  background-color: rgba(32, 24, 0, 0.94) !important;
+  color: #fbbd08 !important;
+  border: 1px solid #fbbd08 !important;
+}
+
+.net-connect-btn-icon {
+  padding: 0px !important;
+  margin-left: -7px !important;
+  margin-right: 2px;
+}
+
+.net-connect-btn-icon-label {
+  padding: 2px 0px !important;
+  font-size: 0.9em !important;
+  max-width: 60px;
+  line-height: 14px !important;
+}
+
+.net-connect-btn-icon-txt {
+  padding: 5px 8px !important;
+  font-size: 0.9em !important;
+  margin-left: 2px;
+}
+/* =========== */
 
 #space,
 .stars {
@@ -212,7 +249,6 @@ input#vendor_balance {
 }
 
 .navigationBar {
-  padding-top: 12px;
   margin-top: 2px;
 }
 
@@ -298,18 +334,6 @@ input#vendor_balance {
   padding: 200px 0px;
 }
 
-.custodian-use {
-  margin: auto;
-  text-align: center;
-  top: 50%;
-  bottom: 50%;
-  left: 0;
-  right: 0;
-  width: fit-content;
-  height: fit-content;
-  position: absolute;
-}
-
 .panel-hdr {
   padding: 2px 3vw;
   border-radius: 3px;
@@ -318,6 +342,7 @@ input#vendor_balance {
 }
 
 .nav-heading {
+  max-width: max-content;
   padding-top: 0px !important;
   margin-top: -10px !important;
   cursor: default;
@@ -330,14 +355,8 @@ input#vendor_balance {
 
 .nav-header-logo {
   padding: 2px 30px !important;
-  margin: -5px 0px -8px 0px !important;
+  margin: 16px 0px -20px 0px !important;
   border-radius: 5px;
-  transition: all 300ms ease-in-out;
-}
-
-.nav-header-logo:hover {
-  background-color: rgba(88, 0, 88, 0.6) !important;
-  transition-delay: 200ms;
   transition: all 300ms ease-in-out;
 }
 
@@ -358,21 +377,8 @@ input#vendor_balance {
   transition: all 300ms ease-in-out;
 }
 
-.swapsHeader {
-  padding: 10px 13px 0px 13px !important;
-}
-
-.swapsHeader .column {
-  padding: 0px 7px !important;
-}
-
-.swapsBalance .ui.label:last-child {
-  margin-right: 3px;
-  margin-left: 3px;
-}
-
-.swapsSelect .column {
-  margin: 0px 3px;
+.nav-item-sel {
+  padding-bottom: 3px !important;
 }
 
 @media screen and (max-width: 979px) /* Tablet */ {
