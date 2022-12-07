@@ -34,7 +34,7 @@ export default function NavigationBar(): JSX.Element {
           <Grid.Column width="12">
             <Grid>
               <Grid.Row columns="equal">
-                <Grid.Column>Menu Item 1</Grid.Column>
+                <Grid.Column>Nav 1</Grid.Column>
                 <Grid.Column>
                   <Network
                     address={''}
@@ -53,14 +53,6 @@ export default function NavigationBar(): JSX.Element {
                     validated={false}
                   />
                 </Grid.Column>
-              </Grid.Row>
-              <Grid.Row columns="equal">
-                <Grid.Column>Menu Item 3</Grid.Column>
-                <Grid.Column>Menu Item 4</Grid.Column>
-              </Grid.Row>
-              <Grid.Row columns="equal">
-                <Grid.Column>Menu Item 5</Grid.Column>
-                <Grid.Column>Menu Item 6</Grid.Column>
               </Grid.Row>
             </Grid>
           </Grid.Column>
