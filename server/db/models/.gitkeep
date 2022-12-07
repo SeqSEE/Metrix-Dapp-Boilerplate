@@ -7,7 +7,6 @@ import {
   DataTypes
 } from 'sequelize';
 import { sequelize } from '..';
-import { Game } from './Game';
 
 class Account extends Model<
   InferAttributes<Account>,
@@ -18,7 +17,6 @@ class Account extends Model<
   declare eth: string | null;
   declare mrx: string | null;
   declare discord: string | null;
-  declare game: ForeignKey<Game['id']> | null;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 }
@@ -62,10 +60,6 @@ Account.init(
         is: /^[0-9]{17,18}$/
       }
     },
-    game: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: true
-    },
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE
   },
@@ -75,9 +69,5 @@ Account.init(
   }
 );
 
-Game.hasMany(Account, {
-  sourceKey: 'id',
-  foreignKey: 'game'
-});
 
 export { Account };
