@@ -1,3 +1,4 @@
+import { NetworkType } from '@metrixcoin/metrilib';
 import { getUser, userDelete, userUpdate } from '@src/utils/db/UserManager';
 import { IncomingHttpHeaders } from 'http';
 import { parseCookiesHeader } from '../../../../../helpers/auth/Cookie';
@@ -8,7 +9,7 @@ export default handler;
 function handler(
   req: {
     method: string;
-    query: { account: string; chain: 'BSC' | 'ETH' };
+    query: { account: string; network: NetworkType };
     headers: IncomingHttpHeaders;
     body: any;
   },
@@ -53,7 +54,7 @@ function handler(
     }
     //console.log(token.usr);
     if (
-      (req.query.account !== token.usr || req.query.chain !== token.chn) &&
+      (req.query.account !== token.usr || req.query.network !== token.net) &&
       !token.adm
     ) {
       return false;
@@ -78,7 +79,7 @@ function handler(
       }
       if (
         (user.account !== (validation as jwtPayload).usr ||
-          user.chain !== (validation as jwtPayload).chn) &&
+          user.chain !== (validation as jwtPayload).net) &&
         !(validation as jwtPayload).adm
       ) {
         return unauthorized();

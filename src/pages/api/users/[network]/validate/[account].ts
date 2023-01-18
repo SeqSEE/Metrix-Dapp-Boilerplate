@@ -6,13 +6,14 @@ import { InfuraProvider, JsonRpcProvider } from '@ethersproject/providers';
 import { createToken } from '../../../../../helpers/auth/Jwt';
 import { getUser } from '@src/utils/db/UserManager';
 import IUser from '@src/interfaces/User';
+import { NetworkType } from '@metrixcoin/metrilib';
 
 export default handler;
 
 async function handler(
   req: {
     method: string;
-    query: { account: string; chain: 'BSC' | 'ETH' };
+    query: { account: string; network: NetworkType };
     headers: IncomingHttpHeaders;
     body: { data: { coin: string; txid: string; confirms: number } };
   },

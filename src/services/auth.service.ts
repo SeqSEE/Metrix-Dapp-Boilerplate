@@ -1,5 +1,6 @@
-import { extApiUrl } from '@src/config/confClient';
-import { apiUrl } from '@src/config/confServer';
+import { NetworkType } from '@metrixcoin/metrilib';
+import { extApiUrl } from '@src/config/client';
+import { apiUrl } from '@src/config/server';
 import { fetchWrapper } from '@src/helpers/FetchWrapper';
 
 export const authService = {
@@ -12,16 +13,16 @@ export const authService = {
 const baseUrl = apiUrl != undefined ? `${apiUrl}/auth` : `${extApiUrl}/auth`;
 const baseUrl2 = apiUrl != undefined ? `${apiUrl}/auth2` : `${extApiUrl}/auth2`;
 
-function fetchNonce(account: string, chain: 'BSC' | 'ETH'): Promise<any> {
-  return fetchWrapper.get(`${baseUrl}/signature/${chain}/${account}`);
+function fetchNonce(account: string, network: NetworkType): Promise<any> {
+  return fetchWrapper.get(`${baseUrl}/signature/${network}/${account}`);
 }
 
 function verifyMessage(params: {
   signature: string;
   account: string;
-  chain: 'BSC' | 'ETH';
+  network: NetworkType;
 }): Promise<any> {
-  return fetchWrapper.post(`${baseUrl}/signature/${params.chain}`, params);
+  return fetchWrapper.post(`${baseUrl}/signature/${params.network}`, params);
 }
 
 async function validateTokenETH(params: { cookie: string }): Promise<any> {

@@ -2,6 +2,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import { toHexString } from '../Parsers';
 import { randomBytes } from 'crypto';
 import { fqdn } from '../../config/server';
+import { NetworkType } from '@metrixcoin/metrilib';
 
 const JWT_KEY = process.env.JWT_KEY;
 let SECRET_KEY = toHexString(randomBytes(22));
@@ -18,14 +19,14 @@ export interface jwtPayload {
   exp: number;
   iat: number;
   adm: boolean;
-  chn: 'BSC' | 'ETH' | 'MRX';
+  net: NetworkType;
 }
 
 export function createToken(
   id: string,
   account: string,
   admin: boolean,
-  chain: 'BSC' | 'ETH' | 'MRX'
+  network: NetworkType
 ) {
   const timestamp = Math.floor(Date.now() / 1000);
   /* Create JWT Payload */
@@ -38,7 +39,7 @@ export function createToken(
     exp: timestamp + 3600, // 1 hour in seconds
     iat: timestamp,
     adm: admin,
-    chn: chain
+    net: network
   } as jwtPayload;
   /* Sign token */
   const token = jwt.sign(payload, SECRET_KEY);

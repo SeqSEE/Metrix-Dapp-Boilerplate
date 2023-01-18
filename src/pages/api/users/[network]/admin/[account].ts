@@ -1,3 +1,4 @@
+import { NetworkType } from '@metrixcoin/metrilib';
 import IUser from '@src/interfaces/User';
 import { getUser } from '@src/utils/db/UserManager';
 import { IncomingHttpHeaders } from 'http';
@@ -9,7 +10,7 @@ export default handler;
 function handler(
   req: {
     method: string;
-    query: { account: string; chain: 'BSC' | 'ETH' };
+    query: { account: string; network: NetworkType };
     headers: IncomingHttpHeaders;
     body: IUser;
   },
