@@ -45,7 +45,7 @@ const handler: (_req: NextApiRequest, res: NextApiResponse) => Promise<void> =
       // TODO: setup user...
       const user = { nonce: '', uuid: '' };
 
-      const prefix = '\x15Metrix Signed Message:\n';
+      const prefix = '\x17Metrix Signed Message:\n';
       const messageSrv = `${signatureMessage}${user.nonce}`;
 
       let verified = false;
