@@ -1,3 +1,5 @@
 //Use this file to export all models as one object
 
-export {  };
+import { Account } from './account';
+
+export { Account };
