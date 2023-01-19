@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { signatureMessage } from '@src/helpers/auth/Jwt';
-//import { User } from '@server/models';
 import { toHexString } from '@src/helpers/Parsers';
 import { randomBytes } from 'crypto';
-import { AddressRegex, HexAddressRegex } from '@src/util/AddressUtils';
+import { HexAddressRegex } from '@src/util/AddressUtils';
+import { Account } from '@server/db/models/account';
 
 const handler: (
   _req: NextApiRequest,
@@ -40,22 +40,20 @@ const handler: (
     const nonce: string = '0x' + toHexString(randomBytes(16));
     const message: string = signatureMessage + nonce;
 
-    /*let user: User | null = null;
-      user = await User.findOne({
-        where: { address_mrx: address }
-      });
+    let user: Account | null = null;
+    user = await Account.findOne({
+      where: { mrx: address }
+    });
 
-      if (user === null) {
-        const uid: string = uuid.v4();
-        user = await User.create({
-          uuid: uid,
-          address_mrx: address,
-          chain: 'MRX',
-          nonce
-        } as User);
-      } else {
-        await user.update({ nonce, chain: 'MRX' });
-      }*/
+    if (user === null) {
+      user = await Account.create({
+        mrx: address,
+        nonce,
+        isAdmin: false
+      } as Account);
+    } else {
+      await user.update({ nonce });
+    }
 
     return complete(message);
   } catch (/* eslint-disable @typescript-eslint/no-explicit-any */ err: any) {

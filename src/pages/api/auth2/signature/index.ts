@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { createToken, signatureMessage } from '@src/helpers/auth/Jwt';
 //import { User } from '@server/models';
 import MetrixMessage from 'bitcoinjs-message';
+import { Account } from '@server/db/models/account';
 
 const handler: (
   _req: NextApiRequest,
@@ -32,20 +33,20 @@ const handler: (
     //console.log(`message ${message}`);
     //console.log(`signature ${signature}`);
 
-    /*let user: User | null = null;
-      user = await User.findOne({ where: { address_mrx: address } });
-      //console.log(`user ${JSON.stringify(user)}`);
+    let _account: Account | null = null;
+    _account = await Account.findOne({ where: { mrx: address } });
+    //console.log(`user ${JSON.stringify(user)}`);
 
-      if (user === null) {
-        return res.status(404).json({
-          statusCode: 404,
-          message: 'User lookup found nothing'
-        });
-      }
-      user = user.get();*/
+    if (_account === null) {
+      return res.status(404).json({
+        statusCode: 404,
+        message: 'User lookup found nothing'
+      });
+    }
+    const account = _account.get();
 
     // TODO: setup user...
-    const user = { nonce: '', uuid: '' };
+    const user = { id: account.id, nonce: account.nonce };
 
     const prefix = '\x17Metrix Signed Message:\n';
     const messageSrv = `${signatureMessage}${user.nonce}`;
@@ -70,7 +71,7 @@ const handler: (
     console.log(`message === messageSrv ${message === messageSrv}`);
 
     if (verified && message === messageSrv) {
-      const token_jwt: string = createToken(user.uuid, address, false);
+      const token_jwt: string = createToken(`${user.id}`, address, false);
       //console.log(`token_jwt ${token_jwt}`);
 
       /*await User.update(
