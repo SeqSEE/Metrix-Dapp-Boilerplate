@@ -3,6 +3,7 @@ import { createToken, signatureMessage } from '@src/helpers/auth/Jwt';
 //import { User } from '@server/models';
 import MetrixMessage from 'bitcoinjs-message';
 import { Account } from '@server/db/models/account';
+import { toHexAddress } from '@src/util/AddressUtils';
 
 const handler: (
   _req: NextApiRequest,
@@ -34,7 +35,7 @@ const handler: (
     //console.log(`signature ${signature}`);
 
     let _account: Account | null = null;
-    _account = await Account.findOne({ where: { mrx: address } });
+    _account = await Account.findOne({ where: { mrx: toHexAddress(address) } });
     //console.log(`user ${JSON.stringify(user)}`);
 
     if (_account === null) {
@@ -71,7 +72,11 @@ const handler: (
     console.log(`message === messageSrv ${message === messageSrv}`);
 
     if (verified && message === messageSrv) {
-      const token_jwt: string = createToken(`${user.id}`, address, false);
+      const token_jwt: string = createToken(
+        `${user.id}`,
+        toHexAddress(address),
+        false
+      );
       //console.log(`token_jwt ${token_jwt}`);
 
       /*await User.update(
