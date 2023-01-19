@@ -1,3 +1,4 @@
+import { NetworkType } from '@metrixcoin/metrilib';
 import { fqdn } from '@src/config/server';
 import { fetchWrapper } from '@src/helpers/FetchWrapper';
 import InteractResponse from '@src/interfaces/InteractResponse';
@@ -216,7 +217,7 @@ const signMessage = async (message: string): Promise<InteractResponse> => {
 };
 
 const getContractAddress = (
-  network: string,
+  network: NetworkType,
   contract: 'MetriVersePlatform' | 'SimpleAuction' | string
 ) => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires

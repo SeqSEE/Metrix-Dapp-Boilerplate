@@ -21,8 +21,7 @@ const handler: (
       res.status(200).json({
         statusCode: 200,
         message: 'success',
-        user: token.usr,
-        network: token.net
+        user: token.usr
       });
     } else {
       res

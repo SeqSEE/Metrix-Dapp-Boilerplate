@@ -9,7 +9,7 @@ export default handler;
 function handler(
   req: {
     method: string;
-    query: { network: NetworkType };
+    query: any;
     body: any;
     headers: IncomingHttpHeaders;
   },
@@ -21,9 +21,9 @@ function handler(
 ): Promise<void> {
   switch (req.method) {
     case 'GET':
-      return getUsers(req.query.network);
+      return getUsers();
     case 'POST':
-      return createUser(req.query.network);
+      return createUser();
     default:
       return res
         .status(200)
@@ -51,7 +51,7 @@ function handler(
     }
   }
 
-  function getUsers(network: NetworkType) {
+  function getUsers() {
     const validation = userValidate(true);
     if (validation !== undefined) {
       return validation;
@@ -60,11 +60,8 @@ function handler(
     return res.status(200).json(_users);
   }
 
-  function createUser(network: NetworkType) {
+  function createUser() {
     try {
-      if (network !== req.body.network) {
-        return res.status(405).json({ message: 'Invalid Network!' });
-      }
       const validation = userValidate(true);
       if (validation !== undefined) {
         return validation;

@@ -9,7 +9,7 @@ export default handler;
 function handler(
   req: {
     method: string;
-    query: { account: string; network: NetworkType };
+    query: { account: string };
     headers: IncomingHttpHeaders;
     body: any;
   },
@@ -53,10 +53,7 @@ function handler(
       return false;
     }
     //console.log(token.usr);
-    if (
-      (req.query.account !== token.usr || req.query.network !== token.net) &&
-      !token.adm
-    ) {
+    if (req.query.account !== token.usr && !token.adm) {
       return false;
     }
     if (requireAdmin && !token.adm) {
@@ -78,8 +75,7 @@ function handler(
         return res.status(200).json(user);
       }
       if (
-        (user.account !== (validation as jwtPayload).usr ||
-          user.chain !== (validation as jwtPayload).net) &&
+        user.account !== (validation as jwtPayload).usr ||
         !(validation as jwtPayload).adm
       ) {
         return unauthorized();

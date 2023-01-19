@@ -2,18 +2,16 @@ import { IncomingHttpHeaders } from 'http';
 import { parseCookiesHeader } from '../../../../../helpers/auth/Cookie';
 import { verifyToken } from '../../../../../helpers/auth/Jwt';
 
-import { InfuraProvider, JsonRpcProvider } from '@ethersproject/providers';
 import { createToken } from '../../../../../helpers/auth/Jwt';
 import { getUser } from '@src/utils/db/UserManager';
 import IUser from '@src/interfaces/User';
-import { NetworkType } from '@metrixcoin/metrilib';
 
 export default handler;
 
 async function handler(
   req: {
     method: string;
-    query: { account: string; network: NetworkType };
+    query: { account: string };
     headers: IncomingHttpHeaders;
     body: { data: { coin: string; txid: string; confirms: number } };
   },
@@ -82,11 +80,7 @@ async function handler(
       const token_jwt: string = createToken(
         user.uuid,
         (validation as any).usr,
-        (validation as any).eth,
-        (validation as any).bsc,
-        (validation as any).mrx,
-        isAdmin,
-        req.query.chain
+        isAdmin
       );
 
       /*updateUser(user.account, req.query.chain, {

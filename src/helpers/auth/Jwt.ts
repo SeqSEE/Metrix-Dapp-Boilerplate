@@ -2,7 +2,6 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import { toHexString } from '../Parsers';
 import { randomBytes } from 'crypto';
 import { fqdn } from '../../config/server';
-import { NetworkType } from '@metrixcoin/metrilib';
 
 const JWT_KEY = process.env.JWT_KEY;
 let SECRET_KEY = toHexString(randomBytes(22));
@@ -19,15 +18,9 @@ export interface jwtPayload {
   exp: number;
   iat: number;
   adm: boolean;
-  net: NetworkType;
 }
 
-export function createToken(
-  id: string,
-  account: string,
-  admin: boolean,
-  network: NetworkType
-) {
+export function createToken(id: string, account: string, admin: boolean) {
   const timestamp = Math.floor(Date.now() / 1000);
   /* Create JWT Payload */
   const payload: JwtPayload = {
@@ -38,8 +31,7 @@ export function createToken(
     nbs: timestamp - 100,
     exp: timestamp + 3600, // 1 hour in seconds
     iat: timestamp,
-    adm: admin,
-    net: network
+    adm: admin
   } as jwtPayload;
   /* Sign token */
   const token = jwt.sign(payload, SECRET_KEY);

@@ -1,4 +1,3 @@
-import { NetworkType } from '@metrixcoin/metrilib';
 import { extApiUrl } from '@src/config/client';
 import { apiUrl } from '@src/config/server';
 import { fetchWrapper } from '@src/helpers/FetchWrapper';
@@ -19,35 +18,27 @@ function getAll(): Promise<any[]> {
   return fetchWrapper.get(baseUrl);
 }
 
-function get(account: string, network: NetworkType): Promise<any> {
-  return fetchWrapper.get(`${baseUrl}/${network}/${account}`);
+function get(account: String): Promise<any> {
+  return fetchWrapper.get(`${baseUrl}/${account}`);
 }
 
 function create(params: any): Promise<void> {
   return fetchWrapper.post(baseUrl, params);
 }
 
-function update(
-  account: string,
-  network: NetworkType,
-  params: any
-): Promise<void> {
-  return fetchWrapper.put(`${baseUrl}/${network}/${account}`, params);
+function update(account: string, params: any): Promise<void> {
+  return fetchWrapper.put(`${baseUrl}/${account}`, params);
 }
 
 // prefixed with underscored because delete is a reserved word in javascript
-function _delete(account: string, network: NetworkType): Promise<void> {
-  return fetchWrapper.delete(`${baseUrl}/${network}/${account}`);
+function _delete(account: string): Promise<void> {
+  return fetchWrapper.delete(`${baseUrl}/${account}`);
 }
 
-function isAdmin(account: string, network: NetworkType): Promise<void> {
-  return fetchWrapper.get(`${baseUrl}/${network}/admin/${account}`);
+function isAdmin(account: string): Promise<void> {
+  return fetchWrapper.get(`${baseUrl}/admin/${account}`);
 }
 
-function validate(
-  account: string,
-  network: NetworkType,
-  params: {}
-): Promise<any> {
-  return fetchWrapper.post(`${baseUrl}/${network}/validate/${account}`, params);
+function validate(account: string, params: {}): Promise<any> {
+  return fetchWrapper.post(`${baseUrl}/validate/${account}`, params);
 }

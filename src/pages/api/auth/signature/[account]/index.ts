@@ -1,7 +1,7 @@
 import { randomBytes } from 'crypto';
-import { toHexString } from '../../../../../../helpers/Parsers';
+import { toHexString } from '../../../../../helpers/Parsers';
 import { IncomingHttpHeaders } from 'http';
-import { signatureMessage } from '../../../../../../helpers/auth/Jwt';
+import { signatureMessage } from '../../../../../helpers/auth/Jwt';
 import { NetworkType } from '@metrixcoin/metrilib';
 //import { User } from '../../../../../../../server/models';
 //import * as uuid from 'uuid';
@@ -11,7 +11,7 @@ export default handler;
 function handler(
   req: {
     method: string;
-    query: { account: string; network: NetworkType };
+    query: { account: string };
     headers: IncomingHttpHeaders;
     /* eslint-disable @typescript-eslint/no-explicit-any */
     body: any;
@@ -37,7 +37,6 @@ function handler(
     try {
       //console.log(`validate: ${JSON.stringify(req.query)}`);
       const account: string = (req.query.account as string).toLowerCase();
-      const network: NetworkType = req.query.network;
       const regex = /^0x[a-fA-F0-9]{40}$/;
       if (!account.match(regex)) {
         return res.status(412).json({

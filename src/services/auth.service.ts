@@ -1,4 +1,3 @@
-import { NetworkType } from '@metrixcoin/metrilib';
 import { extApiUrl } from '@src/config/client';
 import { apiUrl } from '@src/config/server';
 import { fetchWrapper } from '@src/helpers/FetchWrapper';
@@ -13,16 +12,15 @@ export const authService = {
 const baseUrl = apiUrl != undefined ? `${apiUrl}/auth` : `${extApiUrl}/auth`;
 const baseUrl2 = apiUrl != undefined ? `${apiUrl}/auth2` : `${extApiUrl}/auth2`;
 
-function fetchNonce(account: string, network: NetworkType): Promise<any> {
-  return fetchWrapper.get(`${baseUrl}/signature/${network}/${account}`);
+function fetchNonce(account: string): Promise<any> {
+  return fetchWrapper.get(`${baseUrl}/signature/${account}`);
 }
 
 function verifyMessage(params: {
   signature: string;
   account: string;
-  network: NetworkType;
 }): Promise<any> {
-  return fetchWrapper.post(`${baseUrl}/signature/${params.network}`, params);
+  return fetchWrapper.post(`${baseUrl}/signature/`, params);
 }
 
 async function validateTokenETH(params: { cookie: string }): Promise<any> {
