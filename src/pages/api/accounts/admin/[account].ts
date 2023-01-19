@@ -1,8 +1,8 @@
-import IUser from '@src/interfaces/User';
-import { getUser } from '@src/utils/db/UserManager';
+import IAccount from '@src/db/IAccount';
+import { getUser } from '@src/db/UserManager';
+import { parseCookiesHeader } from '@src/helpers/auth/Cookie';
+import { verifyToken } from '@src/helpers/auth/Jwt';
 import { IncomingHttpHeaders } from 'http';
-import { parseCookiesHeader } from '../../../../../helpers/auth/Cookie';
-import { verifyToken } from '../../../../../helpers/auth/Jwt';
 
 export default handler;
 
@@ -11,11 +11,11 @@ function handler(
     method: string;
     query: { account: string };
     headers: IncomingHttpHeaders;
-    body: IUser;
+    body: IAccount;
   },
   res: {
     status: (statusCode: number) => any /* eslint-disable-line */;
-    json: () => { user: IUser | undefined };
+    json: () => { user: IAccount | undefined };
     end: (message: string) => any /* eslint-disable-line */;
   }
 ): Promise<void> {

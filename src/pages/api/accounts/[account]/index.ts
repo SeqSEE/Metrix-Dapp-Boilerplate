@@ -1,8 +1,7 @@
-import { NetworkType } from '@metrixcoin/metrilib';
-import { getUser, userDelete, userUpdate } from '@src/utils/db/UserManager';
+import { getUser, userUpdate, userDelete } from '@src/db/UserManager';
 import { IncomingHttpHeaders } from 'http';
-import { parseCookiesHeader } from '../../../../../helpers/auth/Cookie';
-import { jwtPayload, verifyToken } from '../../../../../helpers/auth/Jwt';
+import { parseCookiesHeader } from '../../../../helpers/auth/Cookie';
+import { jwtPayload, verifyToken } from '../../../../helpers/auth/Jwt';
 
 export default handler;
 
@@ -75,7 +74,7 @@ function handler(
         return res.status(200).json(user);
       }
       if (
-        user.account !== (validation as jwtPayload).usr ||
+        user.mrx !== (validation as jwtPayload).usr ||
         !(validation as jwtPayload).adm
       ) {
         return unauthorized();

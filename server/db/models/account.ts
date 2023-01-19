@@ -3,7 +3,6 @@ import {
   InferAttributes,
   InferCreationAttributes,
   CreationOptional,
-  ForeignKey,
   DataTypes
 } from 'sequelize';
 import { sequelize } from '..';
@@ -13,6 +12,7 @@ class Account extends Model<
   InferCreationAttributes<Account>
 > {
   declare id: CreationOptional<number>;
+  declare isAdmin: boolean;
   declare mrx: string | null;
   declare nonce: string | null;
   declare createdAt: CreationOptional<Date>;
@@ -26,6 +26,7 @@ Account.init(
       autoIncrement: true,
       primaryKey: true
     },
+    isAdmin: DataTypes.BOOLEAN,
     mrx: {
       type: new DataTypes.STRING(40),
       allowNull: true,

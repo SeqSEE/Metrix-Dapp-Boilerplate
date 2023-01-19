@@ -1,10 +1,8 @@
+import IAccount from '@src/db/IAccount';
+import { getUser } from '@src/db/UserManager';
+import { parseCookiesHeader } from '@src/helpers/auth/Cookie';
+import { createToken, verifyToken } from '@src/helpers/auth/Jwt';
 import { IncomingHttpHeaders } from 'http';
-import { parseCookiesHeader } from '../../../../../helpers/auth/Cookie';
-import { verifyToken } from '../../../../../helpers/auth/Jwt';
-
-import { createToken } from '../../../../../helpers/auth/Jwt';
-import { getUser } from '@src/utils/db/UserManager';
-import IUser from '@src/interfaces/User';
 
 export default handler;
 
@@ -17,7 +15,7 @@ async function handler(
   },
   res: {
     status: (statusCode: number) => any /* eslint-disable-line */;
-    json: () => { user: IUser | undefined };
+    json: () => { user: IAccount | undefined };
     end: (message: string) => any /* eslint-disable-line */;
   }
 ): Promise<void> {
@@ -78,7 +76,7 @@ async function handler(
       const isAdmin = user.isAdmin !== undefined ? user.isAdmin : false;
 
       const token_jwt: string = createToken(
-        user.uuid,
+        `${user.id}`,
         (validation as any).usr,
         isAdmin
       );
