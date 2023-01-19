@@ -3,7 +3,7 @@ import { signatureMessage } from '@src/helpers/auth/Jwt';
 //import { User } from '@server/models';
 import { toHexString } from '@src/helpers/Parsers';
 import { randomBytes } from 'crypto';
-import { AddressRegex } from '@src/util/AddressUtils';
+import { AddressRegex, HexAddressRegex } from '@src/util/AddressUtils';
 
 const handler: (
   _req: NextApiRequest,
@@ -30,7 +30,7 @@ const handler: (
     const address = _req.query.address as string;
     console.log(address);
 
-    if (!address.match(AddressRegex)) {
+    if (!address.match(HexAddressRegex)) {
       return res.status(412).json({
         statusCode: 412,
         message: 'Signature Invalid Address'

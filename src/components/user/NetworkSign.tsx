@@ -1,4 +1,5 @@
 import { fetchWrapper } from '@src/helpers/FetchWrapper';
+import { toHexAddress } from '@src/util/AddressUtils';
 import { signMessage } from '@src/util/ContractUtils';
 import React from 'react';
 import { useCookies } from 'react-cookie';
@@ -43,7 +44,7 @@ export default function NetworkSign(props: NetworkProps): JSX.Element {
         (window as any).metrimask.account &&
         (window as any).metrimask.account.loggedIn === true
       )
-        setAddress((window as any).metrimask.account.address);
+        setAddress(toHexAddress((window as any).metrimask.account.address));
     }
   }, []);
 
@@ -274,8 +275,12 @@ export default function NetworkSign(props: NetworkProps): JSX.Element {
     } else if (account && account.loggedIn) {
       setConnect(true);
       setNetwork({ type: account.network });
-      setAddress(account.address);
-      props.onNetworkChanged(account.address, { type: account.network }, true);
+      setAddress(toHexAddress(account.address));
+      props.onNetworkChanged(
+        toHexAddress(account.address),
+        { type: account.network },
+        true
+      );
       if (props.validated) {
         setValidated(true);
         setMessage('⟶ ACK');

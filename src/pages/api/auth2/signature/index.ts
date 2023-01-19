@@ -65,17 +65,12 @@ const handler: (
       return res.status(500).json({ statusCode: 412, message: e.message });
     }
 
-    //console.log(`message ${JSON.stringify(message)}`);
-    //console.log(`messageSrv ${JSON.stringify(messageSrv)}`);
-    //console.log(`message === messageSrv ${message === messageSrv}`);
+    console.log(`message ${JSON.stringify(message)}`);
+    console.log(`messageSrv ${JSON.stringify(messageSrv)}`);
+    console.log(`message === messageSrv ${message === messageSrv}`);
 
     if (verified && message === messageSrv) {
-      const token_jwt: string = createToken(
-        user.uuid,
-        address,
-        false,
-        'TestNet'
-      );
+      const token_jwt: string = createToken(user.uuid, address, false);
       //console.log(`token_jwt ${token_jwt}`);
 
       /*await User.update(
