@@ -1,4 +1,4 @@
-# metrix bot boilerplate
+# metrix dapp boilerplate
 
 A React and Next.js boilerplate with Metrix web3 baked in.
 
