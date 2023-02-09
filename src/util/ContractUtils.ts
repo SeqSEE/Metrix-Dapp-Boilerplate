@@ -29,9 +29,9 @@ const getABIloc = async (contract: 'MRC20' | string) => {
   return abi;
 };
 
-const AddressZero = ethers.constants.AddressZero.replace('0x', '');
+const AddressZero = ethers.ZeroAddress.replace('0x', '');
 
-const HashZero = ethers.constants.HashZero.replace('0x', '');
+const HashZero = ethers.ZeroHash.replace('0x', '');
 
 let f = '';
 for (let i = 0; i < 64; i++) {
@@ -45,7 +45,7 @@ const callContractAPI = async (
   data: string[],
   abi: any[]
 ) => {
-  const iface = new ethers.utils.Interface(abi);
+  const iface = new ethers.Interface(abi);
   const encoded = iface.encodeFunctionData(method, data).replace('0x', '');
   try {
     const response = JSON.parse(
@@ -91,7 +91,7 @@ const callContract = async (
   abi: any[]
 ): Promise<any> => {
   if (window) {
-    const iface = new ethers.utils.Interface(abi);
+    const iface = new ethers.Interface(abi);
     const encoded = iface.encodeFunctionData(method, data).replace('0x', '');
     try {
       const result = (window as any).metrimask.rpcProvider.rawCall(
@@ -99,7 +99,7 @@ const callContract = async (
         [contract.toLowerCase(), encoded]
       );
       const response = (await result).executionResult.output;
-      const decoded: ethers.utils.Result = iface.decodeFunctionResult(
+      const decoded: ethers.Result = iface.decodeFunctionResult(
         method,
         `0x${response}`
       );
@@ -119,7 +119,7 @@ const callContractRPC = async (
   data: string[],
   abi: any[]
 ) => {
-  const iface = new ethers.utils.Interface(abi);
+  const iface = new ethers.Interface(abi);
   const encoded = iface.encodeFunctionData(method, data).replace('0x', '');
   //console.log(`method ${method}`);
   //console.log(`data ${data}`);
@@ -142,7 +142,7 @@ const callContractRPC = async (
     });
     if (result && !result.error) {
       const response = result.data.replace('0x', '');
-      const decoded: ethers.utils.Result = iface.decodeFunctionResult(
+      const decoded: ethers.Result = iface.decodeFunctionResult(
         method,
         `0x${response}`
       );
@@ -179,7 +179,7 @@ const sendToContract = async (
   gasPrice = 5000,
   abi: any[]
 ): Promise<InteractResponse> => {
-  const iface = new ethers.utils.Interface(abi);
+  const iface = new ethers.Interface(abi);
   const encoded = iface.encodeFunctionData(method, data).replace('0x', '');
   try {
     const result = await (window as any).metrimask.rpcProvider.rawCall(
@@ -240,7 +240,7 @@ const getContractAddressLocal = (contract: 'MRC20' | 'MRC721' | string) => {
  * @returns
  */
 const isHashZero = (test: string) => {
-  return test == ethers.constants.HashZero || test == HashZero;
+  return test == ethers.ZeroHash || test == HashZero;
 };
 
 /**
@@ -250,7 +250,7 @@ const isHashZero = (test: string) => {
  * @returns
  */
 const isAddressZero = (test: string) => {
-  return test == ethers.constants.AddressZero || test == AddressZero;
+  return test == ethers.ZeroAddress || test == AddressZero;
 };
 
 export {

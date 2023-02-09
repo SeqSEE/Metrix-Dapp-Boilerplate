@@ -1,5 +1,6 @@
+import { toHexAddress } from '@metrixcoin/metrilib/lib/utils/AddressUtils';
 import { fetchWrapper } from '@src/helpers/FetchWrapper';
-import { toHexAddress } from '@src/util/AddressUtils';
+
 import { signMessage } from '@src/util/ContractUtils';
 import React from 'react';
 import { useCookies } from 'react-cookie';
@@ -69,11 +70,11 @@ export default function NetworkSign(props: NetworkProps): JSX.Element {
       } else if (sign && !connecting) {
         try {
           const messageNonce = await fetchWrapper.get(
-            `/api/auth2/signature/${address}`
+            `/api/auth/signature/${address}`
           );
           const resp = await signMessage(messageNonce.token);
           console.log(`>>> ${JSON.stringify(resp)}`);
-          const signResponse = await fetchWrapper.post('/api/auth2/signature', {
+          const signResponse = await fetchWrapper.post('/api/auth/signature', {
             address: resp.result.address,
             signature: resp.result.signature,
             message: resp.result.message

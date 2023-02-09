@@ -1,7 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { ethers } from 'ethers';
-import { createToken, signatureMessage } from '../../../../helpers/auth/Jwt';
-//import { User } from '../../../../../../server/models';
+import { createToken, signatureMessage } from '@src/helpers/auth/Jwt';
+//import { User } from '@server/models';
+import MetrixMessage from 'bitcoinjs-message';
+import { Account } from '@server/db/models/account';
+import { toHexAddress } from '@metrixcoin/metrilib/lib/utils/AddressUtils';
 
 const handler: (
   _req: NextApiRequest,
@@ -26,57 +28,70 @@ const handler: (
     }
 
     const resp = _req.body;
-    const chain = resp.chain;
-    const account = (resp.account as string).toLowerCase();
-    const signature = resp.signature;
+    const { message, address, signature } = resp;
 
-    console.log(`chain ${chain} account ${account}`);
+    //console.log(`account ${address}`);
+    //console.log(`message ${message}`);
+    //console.log(`signature ${signature}`);
 
-    /*let user: User | null = null;
-      if (chain == 'ETH') {
-        user = await User.findOne({ where: { address_eth: account } });
-        console.log(`user ${JSON.stringify(user)}`);
-      } else if (chain == 'BSC') {
-        user = await User.findOne({ where: { address_bsc: account } });
-        console.log(`user ${JSON.stringify(user)}`);
-      }
+    let _account: Account | null = null;
+    _account = await Account.findOne({ where: { mrx: toHexAddress(address) } });
+    //console.log(`user ${JSON.stringify(user)}`);
 
-      if (user === null) {
-        return res.status(404).json({
-          statusCode: 404,
-          message: 'User lookup found nothing'
-        });
-      }
-
-      user = user.get();*/
+    if (_account === null) {
+      return res.status(404).json({
+        statusCode: 404,
+        message: 'User lookup found nothing'
+      });
+    }
+    const account = _account.get();
 
     // TODO: setup user...
-    const user = { nonce: '', uuid: '' };
+    const user = { id: account.id, nonce: account.nonce };
 
-    const message = `${signatureMessage}${user.nonce}`;
-    console.log(message);
-    const verified = ethers.utils
-      .verifyMessage(message, signature)
-      .toLowerCase();
-    console.log(verified);
+    const prefix = '\x17Metrix Signed Message:\n';
+    const messageSrv = `${signatureMessage}${user.nonce}`;
 
-    if (verified === account) {
-      const token_jwt: string = createToken(user.uuid, verified, false);
-      console.log(token_jwt);
+    let verified = false;
+    try {
+      verified = MetrixMessage.verify(
+        message,
+        address,
+        signature,
+        prefix,
+        false
+      );
+      //console.log(`verified ${verified}`);
+    } catch (/* eslint-disable @typescript-eslint/no-explicit-any */ e: any) {
+      console.log(e);
+      return res.status(500).json({ statusCode: 412, message: e.message });
+    }
+
+    console.log(`message ${JSON.stringify(message)}`);
+    console.log(`messageSrv ${JSON.stringify(messageSrv)}`);
+    console.log(`message === messageSrv ${message === messageSrv}`);
+
+    if (verified && message === messageSrv) {
+      const token_jwt: string = createToken(
+        `${user.id}`,
+        toHexAddress(address),
+        false
+      );
+      //console.log(`token_jwt ${token_jwt}`);
 
       /*await User.update(
           {
             isLogin: true,
             nonce: ''
           },
-          { where: { address_eth: account, chain } }
+          { where: { address_mrx: address, chain: 'MRX' } }
         );*/
 
       return complete(token_jwt);
     } else {
       return res.status(404).json({
         statusCode: 404,
-        message: 'User lookup found nothing.'
+        message: 'User lookup failed validation.'
       });
     }
   } catch (/* eslint-disable @typescript-eslint/no-explicit-any */ err: any) {

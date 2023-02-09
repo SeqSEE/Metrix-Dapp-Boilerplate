@@ -2,8 +2,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { signatureMessage } from '@src/helpers/auth/Jwt';
 import { toHexString } from '@src/helpers/Parsers';
 import { randomBytes } from 'crypto';
-import { HexAddressRegex } from '@src/util/AddressUtils';
 import { Account } from '@server/db/models/account';
+import { HexAddressRegex } from '@src/util/AddressUtils';
 
 const handler: (
   _req: NextApiRequest,
