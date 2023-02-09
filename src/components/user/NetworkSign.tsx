@@ -72,7 +72,7 @@ export default function NetworkSign(props: NetworkProps): JSX.Element {
             `/api/auth2/signature/${address}`
           );
           const resp = await signMessage(messageNonce.token);
-          //console.log(resp);
+          console.log(`>>> ${JSON.stringify(resp)}`);
           const signResponse = await fetchWrapper.post('/api/auth2/signature', {
             address: resp.result.address,
             signature: resp.result.signature,
